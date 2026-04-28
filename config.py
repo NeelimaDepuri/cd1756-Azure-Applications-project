@@ -15,7 +15,14 @@ class Config(object):
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD')
     # Below URI may need some adjustments for driver version, based on your OS, if running locally
     if SQL_USER_NAME and SQL_SERVER and SQL_PASSWORD and SQL_DATABASE:
-        SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+17+for+SQL+Server'
+        SQLALCHEMY_DATABASE_URI = (
+        "mssql+pyodbc://"
+        + SQL_USER_NAME + ":" + SQL_PASSWORD
+        + "@"
+        + SQL_SERVER + ":1433/"
+        + SQL_DATABASE
+        + "?driver=ODBC+Driver+17+for+SQL+Server"
+        )
     else:
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
